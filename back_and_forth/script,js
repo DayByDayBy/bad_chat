@@ -1,0 +1,39 @@
+document.getElementById('start-conversation').addEventListener('click', startConversation);
+
+function startConversation() {
+    const llm1 = document.getElementById('llm1').value;
+    const llm2 = document.getElementById('llm2').value;
+    const topic = document.getElementById('topic').value;
+    const messages = document.getElementById('messages').value;
+
+    // clear previous convo
+    document.getElementById('conversation').innerHTML = '';
+
+
+    // simulated conversation with dummy data
+    simulateConversation(llm1, llm2, topic, messages);
+}
+
+function simulateConversation(llm1, llm2, topic, messages) {
+    const conversation = document.getElementById('conversation');
+    const delay = 1000; // delay between messages (ms) because they can sometimes crash into each other 
+
+    for (let i = 0; i < messages * 2; i++) {
+        setTimeout(() => {
+            const messageElement = document.createElement('div');
+            const isLLM1 = i % 2 === 0;
+            messageElement.className = `message ${isLLM1 ? 'llm1' : 'llm2'}`;
+            
+            const labelElement = document.createElement('div');
+            labelElement.className = 'message-label';
+            labelElement.textContent = isLLM1 ? `LLM 1 (${llm1}):` : `LLM 2 (${llm2}):`;
+            
+            const contentElement = document.createElement('div');
+            contentElement.textContent = `This is a simulated message about "${topic}" from ${isLLM1 ? llm1 : llm2}.`;
+            
+            messageElement.appendChild(labelElement);
+            messageElement.appendChild(contentElement);
+            conversation.appendChild(messageElement);
+        }, i * delay);
+    }
+}

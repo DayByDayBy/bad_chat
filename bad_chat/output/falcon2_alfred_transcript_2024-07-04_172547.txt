@@ -1,0 +1,6 @@
+User: Initial Prompt
+Model: pitch me a movie that you think would be a critical hit. think as far inside or outside the box as you like.
+
+User: Error during generation: model 'falcon2' not found, try pulling it first
+Model: Error during chat: model 'alfred' not found, try pulling it first
+

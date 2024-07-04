@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Dialectica</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard">
+        <div class="llm-selector">
+            <label for="llm1">LLM 1:</label>
+            <select id="llm1">
+                <option value="gpt-j">GPT-J</option>
+                <option value="gpt-neox">GPT-NeoX</option>
+                <option value="alpaca">Alpaca</option>
+            </select>
+            <label for="llm2">LLM 2:</label>
+            <select id="llm2">
+                <option value="gpt-j">GPT-J</option>
+                <option value="gpt-neox">GPT-NeoX</option>
+                <option value="alpaca">Alpaca</option>
+            </select>
+        </div>
+        <div class="conversation-settings">
+            <label for="topic">Topic:</label>
+            <input type="text" id="topic" placeholder="Enter conversation topic">
+            <label for="messages">Messages per LLM:</label>
+            <input type="number" id="messages" min="1" max="10" value="5">
+        </div>
+        <button id="start-conversation">Start Conversation</button>
+    </div>
+    <div class="conversation-container" id="conversation"></div>
+    <script src="script.js"></script>
+</body>
+</html>
