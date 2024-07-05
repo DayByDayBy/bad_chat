@@ -1,17 +1,14 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import ollama
-# import asyncio
 
 app = Flask(__name__)
 
 model_name = "llama3"
 
-
 @app.route('/')
 def index():
-    return "your weird little flask application is running."
+    return render_template('index.html')
 
-@app.route('/generate_sequence', methods=['POST'])
 @app.route('/generate_sequence', methods=['POST'])
 def generate_sequence():
     try:
@@ -27,13 +24,15 @@ def generate_sequence():
 
         for i in range(iterations):
             try:
+                response = ollama.chat(model=model_name, messages=[{'role': 'user', 'content': current_prompt}])
+
                 response = ollama.generate(prompt=current_prompt, model=model_name)
                 response_text = response['response']  # ollama should return a dict with 'response' key
                 results.append({'prompt': current_prompt, 'response': response_text})
                 current_prompt = response_text
             except Exception as e:
                 print(f"Error during generation {i+1}:", e)
-                return jsonify({'error': f'generation failed at iteration {i+1}: {str(e)}'}), 500
+                return jsonify({'error': f'Generation failed at iteration {i+1}: {str(e)}'}), 500
 
         return jsonify({'results': results})
     except Exception as e:
@@ -44,16 +43,8 @@ def generate_sequence():
 def not_found(error):
     return "This route is not found. Please check the URL.", 404
 
-
-
-
-
-
-
-
 if __name__ == '__main__':
     app.run(debug=True)
-    
     
     
     

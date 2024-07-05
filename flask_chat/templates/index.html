@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Generator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        #results { margin-top: 20px; }
+        .result-item { margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h1>_badChat</h1>
+    <form id="promptForm">
+        <label for="initial_prompt">Initial Prompt:</label><br>
+        <textarea id="initial_prompt" name="initial_prompt" rows="4" cols="50">generate an innovative prompt.</textarea><br>
+        <label for="iterations">iterations:</label><br>
+        <input type="number" id="iterations" name="iterations" value="8" min="1" max="20"><br><br>
+        <input type="submit" value="Generate">
+    </form>
+    <div id="results"></div>
+
+    <script>
+    $(document).ready(function() {
+        $('#promptForm').submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: '/generate_sequence',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    initial_prompt: $('#initial_prompt').val(),
+                    iterations: parseInt($('#iterations').val())
+                }),
+                success: function(response) {
+                    $('#results').empty();
+                    response.results.forEach(function(item, index) {
+                        $('#results').append(
+                            '<div class="result-item">' +
+                            '<br>' +
+                            '<strong>Response ' + (index + 1) + ':</strong> ' + item.response +
+                            '</div>'
+                        );
+                    });
+                },
+                error: function(xhr, status, error) {
+                    $('#results').html('<p>Error: ' + error + '</p>');
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>
