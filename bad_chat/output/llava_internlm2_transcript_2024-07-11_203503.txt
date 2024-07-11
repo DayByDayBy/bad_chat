@@ -1,0 +1,30 @@
+User: Initial Prompt
+Model: pitch me a movie that you think would be a critical hit. think as far inside or outside the box as you like.
+
+User: Error during generation: model 'llava' not found, try pulling it first
+Model: It seems that you encountered an error while trying to generate something related to the `llava` model. This issue typically arises because your environment doesn't have access to this particular model.
+
+To resolve this problem, follow these steps:
+
+1. **Check Availability of 'llava' Model**: Ensure that the repository or source where you are attempting to pull the `llava` model from is correctly specified and up-to-date.
+   
+2. **Pull the Required Model**:
+   Depending on your platform (Python environment), there might be specific commands for pulling models.
+
+In a typical Python setup, if it's a custom model developed by someone in your organization or team, you may need to pull this locally using something like `!wget` and then load it into your script. For instance:
+
+```
+!wget <url_of_the_model>
+import llama
+llama.model = 'URL_OF_THE_MODEL'
+```
+
+If the model is from a specific library or service (like OpenAI's GPT), you'll typically use their API to fetch the needed version of the model.
+
+3. **Verify Installation**:
+   Ensure that all necessary libraries and dependencies for `llava` are installed correctly in your environment.
+   
+4. **Restart Your Environment**: Sometimes, a simple restart can resolve issues related to outdated or cached states.
+
+If you're still facing difficulties after following these steps, please provide more context about what exactly the model is supposed to do so I can assist further!
+
