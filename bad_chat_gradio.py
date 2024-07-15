@@ -126,4 +126,4 @@ with gr.Blocks(
         outputs=[chatbot, gr.State()]
     )
 
-demo.launch(share=True)
+demo.launch()
